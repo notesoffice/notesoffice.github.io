@@ -1,20 +1,4 @@
 <html><head><base href="https://notesoffice.github.io/"></base><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Notes Office</title><style>
-:root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --header-bg: #f3f3f3;
-    --button-bg: #0078d4;
-    --button-hover: #106ebe;
-}
-
-[data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --text-color: #ffffff;
-    --header-bg: #2d2d2d;
-    --button-bg: #004578;
-    --button-hover: #005a9e;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -23,8 +7,8 @@
 
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: #1a1a1a;
+    color: #ffffff;
 }
 
 .header {
@@ -32,7 +16,7 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: var(--header-bg);
+    background-color: #2d2d2d;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -46,7 +30,7 @@ body {
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--text-color);
+    color: #ffffff;
 }
 
 .settings-panel {
@@ -55,7 +39,7 @@ body {
     right: -300px;
     width: 300px;
     height: 100vh;
-    background-color: var(--header-bg);
+    background-color: #2d2d2d;
     padding: 2rem;
     box-shadow: -2px 0 4px rgba(0,0,0,0.1);
     transition: right 0.3s;
@@ -67,20 +51,6 @@ body {
 
 .settings-panel h2 {
     margin-bottom: 2rem;
-}
-
-.theme-button {
-    background-color: var(--button-bg);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.theme-button:hover {
-    background-color: var(--button-hover);
 }
 
 .content {
@@ -103,20 +73,26 @@ body {
     font-size: 1.1rem;
     border: none;
     border-radius: 4px;
-    background-color: var(--button-bg);
+    background-color: #004578;
     color: white;
     cursor: pointer;
     text-decoration: none;
 }
 
 .btn:hover {
-    background-color: var(--button-hover);
+    background-color: #005a9e;
 }
 
 .creator-info {
     margin-top: 0.5rem;
     font-size: 0.9rem;
-    color: var(--text-color);
+    color: #ffffff;
+}
+
+.version-info {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    color: #ffffff;
 }
 </style></head><body>
 <div class="header">
@@ -125,10 +101,12 @@ body {
 </div>
 
 <div class="settings-panel" id="settingsPanel">
-    <h2>Configurações</h2>
-    <button class="theme-button" id="themeButton">Desativar Tema Escuro</button>
+    <h2>Sobre</h2>
     <div class="creator-info">
         Aplicativo Criado por Pedro Enrique
+    </div>
+    <div class="version-info">
+        Notes Office versão 1.0
     </div>
 </div>
 
@@ -147,34 +125,9 @@ body {
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menuBtn');
     const settingsPanel = document.getElementById('settingsPanel');
-    const themeButton = document.getElementById('themeButton');
-
-    // Initialize dark theme by default
-    if (!localStorage.getItem('theme')) {
-        localStorage.setItem('theme', 'dark');
-    }
-
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        themeButton.textContent = 'Desativar Tema Escuro';
-    }
 
     menuBtn.addEventListener('click', function() {
         settingsPanel.classList.toggle('active');
-    });
-
-    themeButton.addEventListener('click', function() {
-        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-        if (!isDark) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem('theme', 'dark');
-            this.textContent = 'Desativar Tema Escuro';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
-            this.textContent = 'Ativar Tema Escuro';
-        }
     });
 
     document.addEventListener('click', function(event) {
