@@ -126,7 +126,7 @@ body {
 
 <div class="settings-panel" id="settingsPanel">
     <h2>Configurações</h2>
-    <button class="theme-button" id="themeButton">Ativar Tema Escuro</button>
+    <button class="theme-button" id="themeButton">Desativar Tema Escuro</button>
     <div class="creator-info">
         Aplicativo Criado por Pedro Enrique
     </div>
@@ -137,9 +137,9 @@ body {
     <p>Notes Office é uma poderosa suíte de produtividade de escritório com planilha, editor de texto, editor de apresentação e muito mais. Sua interface limpa e suas ferramentas avançadas o farão soltar sua criatividade e melhorar sua produtividade.</p>
     
     <div class="action-buttons">
-        <a href="https://notesoffice.github.io/EditorDeDocumentos" class="btn">Criar Novo Documento</a>
-        <a href="https://notesoffice.github.io/EditorDePlanilhas" class="btn">Criar Nova Planilha</a>
-        <a href="https://notesoffice.github.io/EditorDeApresentacao" class="btn">Criar Nova Apresentação</a>
+        <a href="https://notesoffice.github.io/EditorDeDocumentos" class="btn">Editor de Documentos</a>
+        <a href="https://notesoffice.github.io/EditorDePlanilhas" class="btn">Editor de Planilhas</a>
+        <a href="https://notesoffice.github.io/EditorDeSlides" class="btn">Editor de Apresentações</a>
     </div>
 </div>
 
@@ -148,6 +148,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menuBtn');
     const settingsPanel = document.getElementById('settingsPanel');
     const themeButton = document.getElementById('themeButton');
+
+    // Initialize dark theme by default
+    if (!localStorage.getItem('theme')) {
+        localStorage.setItem('theme', 'dark');
+    }
 
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
