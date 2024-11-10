@@ -1,0 +1,181 @@
+<html><head><base href="https://notesoffice.github.io/"></base><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Notes Office</title><style>
+:root {
+    --bg-color: #ffffff;
+    --text-color: #000000;
+    --header-bg: #f3f3f3;
+    --button-bg: #0078d4;
+    --button-hover: #106ebe;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --header-bg: #2d2d2d;
+    --button-bg: #004578;
+    --button-hover: #005a9e;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--header-bg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.menu-button {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+.settings-panel {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--header-bg);
+    padding: 2rem;
+    box-shadow: -2px 0 4px rgba(0,0,0,0.1);
+    transition: right 0.3s;
+}
+
+.settings-panel.active {
+    right: 0;
+}
+
+.settings-panel h2 {
+    margin-bottom: 2rem;
+}
+
+.theme-button {
+    background-color: var(--button-bg);
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.theme-button:hover {
+    background-color: var(--button-hover);
+}
+
+.content {
+    padding: 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--button-bg);
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: var(--button-hover);
+}
+
+.creator-info {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+}
+</style></head><body>
+<div class="header">
+    <div class="logo">Notes Office</div>
+    <button class="menu-button" id="menuBtn">☰</button>
+</div>
+
+<div class="settings-panel" id="settingsPanel">
+    <h2>Configurações</h2>
+    <button class="theme-button" id="themeButton">Ativar Tema Escuro</button>
+    <div class="creator-info">
+        Aplicativo Criado por Pedro Enrique
+    </div>
+</div>
+
+<div class="content">
+    <h1>Bem-vindo(a) ao Notes Office</h1>
+    <p>Notes Office é uma poderosa suíte de produtividade de escritório com planilha, editor de texto, editor de apresentação e muito mais. Sua interface limpa e suas ferramentas avançadas o farão soltar sua criatividade e melhorar sua produtividade.</p>
+    
+    <div class="action-buttons">
+        <a href="https://notesoffice.github.io/EditorDeDocumentos" class="btn">Criar Novo Documento</a>
+        <a href="https://notesoffice.github.io/EditorDePlanilhas" class="btn">Criar Nova Planilha</a>
+        <a href="https://notesoffice.github.io/EditorDeApresentacao" class="btn">Criar Nova Apresentação</a>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const menuBtn = document.getElementById('menuBtn');
+    const settingsPanel = document.getElementById('settingsPanel');
+    const themeButton = document.getElementById('themeButton');
+
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeButton.textContent = 'Desativar Tema Escuro';
+    }
+
+    menuBtn.addEventListener('click', function() {
+        settingsPanel.classList.toggle('active');
+    });
+
+    themeButton.addEventListener('click', function() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        if (!isDark) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            this.textContent = 'Desativar Tema Escuro';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            this.textContent = 'Ativar Tema Escuro';
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        if (!settingsPanel.contains(event.target) && event.target !== menuBtn) {
+            settingsPanel.classList.remove('active');
+        }
+    });
+});
+</script></body></html>
